@@ -1,0 +1,57 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/datepicker.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+</head>
+<body>
+	<h3>BootDateDisabler Demo</h3>
+	<p>This is a simple demonstration on how to disable specific dates. In this demo, the disabled dates are '07/31/2013' and '08/01/2013'.</p>
+	<p>Feel free to copy, redistribute, modify, and use it in whatever projects you have.</p>
+	<div class="pull-left">
+		<input type="text" id="datepicker"/>
+	</div>
+	<div class="well pull-right">
+		Sample Constructor:
+		<pre>
+		$(document).ready(function() {
+			$("#datepicker").datepicker({
+				specificDatesDisabled: ["07/31/2013","08/01/2013"]
+			});
+		});
+		</pre>
+		Disabled dates in this demo are <span id="disabledDates"></span>
+	</div>
+
+	<script src="js/jquery-1.8.3.js"></script>
+	<script src="js/bootstrap-datepicker-plus-specificdatesdisabler.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			var d = new Date(),
+				year = d.getUTCFullYear(),
+				month = d.getUTCMonth();
+				
+			var monthStr = month+1;
+			if (monthStr < 10) {
+				monthStr = '0'+monthStr;
+			}
+			var dayStr = (d.getUTCDate()+2);
+			if (parseInt(dayStr) < 10) {
+				dayStr = '0'+dayStr;
+			}
+			var tomorrow = monthStr + "/" + dayStr + "/" + year;
+			
+			dayStr = parseInt(d.getUTCDate()+4);
+			if (dayStr < 10) {
+				dayStr = '0'+dayStr;
+			}
+			var otherDay = monthStr + "/" + dayStr + "/" + year;
+			$("#disabledDates").html("'" + tomorrow + "' and '" + otherDay + "'");
+			$("#datepicker").datepicker({
+				specificDatesDisabled: [tomorrow,otherDay]
+			});
+		});
+	</script>
+</body>
+</html>
